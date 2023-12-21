@@ -1,0 +1,6 @@
+#NOTE: This is a Maven Resolver internal implementation file, its format can be changed without prior notice.
+#Tue Dec 19 12:31:02 CST 2023
+jackson-annotations-2.9.0.jar>aliyunmaven=
+jackson-annotations-2.9.0.pom>xmlx-maven-public=
+jackson-annotations-2.9.0.pom>aliyunmaven=
+jackson-annotations-2.9.0.jar>xmlx-maven-public=

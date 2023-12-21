@@ -36,6 +36,24 @@ public class IMTLogFactory {
         PushPlusApi.sendNotice(iUser, operLog);
     }
 
+    public static void sendSuccessMessage(IUser iUser, String logContent) {
+        ILog operLog = new ILog();
+
+        operLog.setOperTime(new Date());
+        if (logContent.contains("成功")) {
+            operLog.setStatus(0);
+            //推送
+            PushPlusApi.sendSuccessNotice(iUser, operLog);
+        } else {
+            //失败
+            operLog.setStatus(1);
+        }
+        operLog.setMobile(iUser.getMobile());
+        operLog.setCreateUser(iUser.getCreateUser());
+        operLog.setLogContent(logContent);
+        AsyncManager.me().execute(recordOper(operLog));
+    }
+
     /**
      * 操作日志记录
      *

@@ -4,7 +4,6 @@
 
 ```bash
 # 克隆项目
-git clone https://github.com/oddfar/campus
 
 # 进入项目目录
 cd campus-ui

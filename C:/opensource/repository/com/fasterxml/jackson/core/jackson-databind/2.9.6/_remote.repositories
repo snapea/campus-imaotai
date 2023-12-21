@@ -1,0 +1,6 @@
+#NOTE: This is a Maven Resolver internal implementation file, its format can be changed without prior notice.
+#Tue Dec 19 12:31:02 CST 2023
+jackson-databind-2.9.6.jar>xmlx-maven-public=
+jackson-databind-2.9.6.pom>xmlx-maven-public=
+jackson-databind-2.9.6.pom>aliyunmaven=
+jackson-databind-2.9.6.jar>aliyunmaven=

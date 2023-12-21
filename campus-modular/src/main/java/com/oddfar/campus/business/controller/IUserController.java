@@ -34,6 +34,12 @@ public class IUserController {
     @Autowired
     private IShopService iShopService;
 
+//
+//    @GetMapping(value = "/listV2", name = "查询I茅台预约商品列列表")
+//    public void appointmentResultsV2() {
+//        imtService.appointmentResultsBatchV2();
+//    }
+
     /**
      * 查询I茅台用户列表
      */

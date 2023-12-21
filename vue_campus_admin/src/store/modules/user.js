@@ -7,7 +7,8 @@ const user = {
     name: '',
     avatar: '',
     roles: [],
-    permissions: []
+    permissions: [],
+    accountMaxCount: 10
   },
 
   mutations: {
@@ -25,7 +26,8 @@ const user = {
     },
     SET_PERMISSIONS: (state, permissions) => {
       state.permissions = permissions
-    }
+    },
+
   },
 
   actions: {
@@ -64,6 +66,7 @@ const user = {
           }
           commit('SET_NAME', user.userName)
           commit('SET_AVATAR', avatar)
+
           resolve(res)
         }).catch(error => {
           reject(error)

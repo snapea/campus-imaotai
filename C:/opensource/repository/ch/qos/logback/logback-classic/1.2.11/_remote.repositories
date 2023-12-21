@@ -1,0 +1,6 @@
+#NOTE: This is a Maven Resolver internal implementation file, its format can be changed without prior notice.
+#Tue Dec 19 12:31:05 CST 2023
+logback-classic-1.2.11.jar>aliyunmaven=
+logback-classic-1.2.11.jar>xmlx-maven-public=
+logback-classic-1.2.11.pom>aliyunmaven=
+logback-classic-1.2.11.pom>xmlx-maven-public=

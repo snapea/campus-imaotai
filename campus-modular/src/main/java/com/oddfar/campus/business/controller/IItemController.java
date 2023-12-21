@@ -5,11 +5,10 @@ import com.oddfar.campus.business.mapper.IItemMapper;
 import com.oddfar.campus.business.service.IShopService;
 import com.oddfar.campus.common.annotation.ApiResource;
 import com.oddfar.campus.common.domain.R;
+import com.oddfar.campus.common.domain.entity.SysUserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -29,6 +28,8 @@ public class IItemController {
     @Autowired
     private IShopService iShopService;
 
+
+
     /**
      * 查询I茅台预约商品列列表
      */
@@ -37,6 +38,14 @@ public class IItemController {
         List<IItem> iItems = iItemMapper.selectList();
 
         return R.ok(iItems);
+    }
+
+    @GetMapping(value = "/getUserInfoByName")
+    public R getAccountMaxCount(@RequestParam() String username) {
+        SysUserEntity res = iShopService.getUserInfoByName(username);
+
+        return R.ok(res);
+
     }
 
     /**

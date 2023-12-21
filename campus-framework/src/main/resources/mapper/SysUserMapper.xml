@@ -20,6 +20,8 @@
         <result property="createTime"   column="create_time"  />
         <result property="updateUser"     column="update_user"    />
         <result property="updateTime"   column="update_time"  />
+        <result property="expirationTime"   column="expiration_time"  />
+        <result property="accountMaxCount"   column="account_max_count"  />
         <result property="remark"       column="remark"       />
         <collection  property="roles"   javaType="java.util.List"   resultMap="RoleResult" />
     </resultMap>
@@ -35,7 +37,7 @@
 
 
     <sql id="selectUserVo">
-        select u.user_id, u.user_name, u.nick_name, u.email, u.avatar, u.phonenumber, u.password, u.sex, u.status, u.del_flag, u.login_ip, u.login_date, u.create_user, u.create_time, u.remark,
+        select u.user_id, u.user_name, u.nick_name, u.email,u.account_max_count,u.expiration_time, u.avatar, u.phonenumber, u.password, u.sex, u.status, u.del_flag, u.login_ip, u.login_date, u.create_user, u.create_time, u.remark,
                r.role_id, r.role_name, r.role_key, r.role_sort, r.status as role_status
         from sys_user u
                  left join sys_user_role ur on u.user_id = ur.user_id

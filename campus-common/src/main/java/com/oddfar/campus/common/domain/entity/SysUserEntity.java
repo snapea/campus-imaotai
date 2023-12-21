@@ -3,6 +3,7 @@ package com.oddfar.campus.common.domain.entity;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.oddfar.campus.common.domain.BaseEntity;
 import com.oddfar.campus.common.validator.Xss;
 import lombok.Data;
@@ -74,6 +75,14 @@ public class SysUserEntity extends BaseEntity  {
 
     /** 备注 */
     private String remark;
+
+    /** 到期时间 */
+//    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", timezone = "UTC")
+    private Date expirationTime;
+
+    /** 最大账号数 */
+    private Integer accountMaxCount;
 
     /** 角色对象 */
     @TableField(exist = false)

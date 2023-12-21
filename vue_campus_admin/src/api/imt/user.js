@@ -46,6 +46,16 @@ export function listUser(query) {
     })
 }
 
+// 根据name查询用户信息
+export function getUserByNameReq(query) {
+  return request({
+      url: '/imt/item/getUserInfoByName',
+      method: 'get',
+      params: query
+  })
+}
+
+
 // 查询I茅台用户详细
 export function getUser(mobile) {
     return request({

@@ -1,0 +1,6 @@
+#NOTE: This is a Maven Resolver internal implementation file, its format can be changed without prior notice.
+#Tue Dec 19 12:31:00 CST 2023
+snakeyaml-1.30.jar>aliyunmaven=
+snakeyaml-1.30.jar>xmlx-maven-public=
+snakeyaml-1.30.pom>aliyunmaven=
+snakeyaml-1.30.pom>xmlx-maven-public=

@@ -9,6 +9,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import java.util.Date;
+
 /**
  * 安全服务工具类
  *
@@ -47,6 +49,9 @@ public class SecurityUtils {
             //用户不正常
             if (!loginUser.getUser().getStatus().equals(UserConstants.NORMAL)) {
                 throw new ServiceException("用户被禁止", HttpStatus.FORBIDDEN);
+            }
+            if(loginUser.getUser().getExpirationTime() != null && loginUser.getUser().getExpirationTime().before(new Date())){
+                throw new ServiceException("用户已过期", HttpStatus.FORBIDDEN);
             }
             return loginUser;
         } catch (Exception e) {

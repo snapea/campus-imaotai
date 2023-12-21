@@ -14,8 +14,10 @@ import com.oddfar.campus.business.entity.IItem;
 import com.oddfar.campus.business.entity.IShop;
 import com.oddfar.campus.business.mapper.IItemMapper;
 import com.oddfar.campus.business.mapper.IShopMapper;
+import com.oddfar.campus.business.mapper.IUserMapper;
 import com.oddfar.campus.business.service.IShopService;
 import com.oddfar.campus.common.core.RedisCache;
+import com.oddfar.campus.common.domain.entity.SysUserEntity;
 import com.oddfar.campus.common.exception.ServiceException;
 import com.oddfar.campus.common.utils.StringUtils;
 import org.slf4j.Logger;
@@ -41,6 +43,9 @@ public class IShopServiceImpl extends ServiceImpl<IShopMapper, IShop> implements
     IShopMapper iShopMapper;
     @Autowired
     IItemMapper iItemMapper;
+
+    @Autowired
+    IUserMapper iUserMapper;
 
     @Autowired
     RedisCache redisCache;
@@ -237,6 +242,12 @@ public class IShopServiceImpl extends ServiceImpl<IShopMapper, IShop> implements
 
 
         return shopId;
+    }
+
+    @Override
+    public SysUserEntity getUserInfoByName(String userName) {
+        SysUserEntity userList = iUserMapper.getUserByName(userName);
+        return userList;
     }
 
     /**

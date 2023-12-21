@@ -1,0 +1,6 @@
+#NOTE: This is a Maven Resolver internal implementation file, its format can be changed without prior notice.
+#Tue Dec 19 12:31:03 CST 2023
+kotlin-stdlib-1.6.21.jar>xmlx-maven-public=
+kotlin-stdlib-1.6.21.pom>aliyunmaven=
+kotlin-stdlib-1.6.21.pom>xmlx-maven-public=
+kotlin-stdlib-1.6.21.jar>aliyunmaven=

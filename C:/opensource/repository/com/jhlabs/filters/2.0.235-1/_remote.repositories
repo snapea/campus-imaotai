@@ -1,0 +1,6 @@
+#NOTE: This is a Maven Resolver internal implementation file, its format can be changed without prior notice.
+#Tue Dec 19 12:27:53 CST 2023
+filters-2.0.235-1.jar>xmlx-maven-public=
+filters-2.0.235-1.pom>aliyunmaven=
+filters-2.0.235-1.pom>xmlx-maven-public=
+filters-2.0.235-1.jar>aliyunmaven=

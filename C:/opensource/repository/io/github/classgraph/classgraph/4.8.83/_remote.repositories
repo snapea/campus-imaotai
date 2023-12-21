@@ -1,0 +1,6 @@
+#NOTE: This is a Maven Resolver internal implementation file, its format can be changed without prior notice.
+#Tue Dec 19 12:28:21 CST 2023
+classgraph-4.8.83.jar>aliyunmaven=
+classgraph-4.8.83.jar>xmlx-maven-public=
+classgraph-4.8.83.pom>xmlx-maven-public=
+classgraph-4.8.83.pom>aliyunmaven=

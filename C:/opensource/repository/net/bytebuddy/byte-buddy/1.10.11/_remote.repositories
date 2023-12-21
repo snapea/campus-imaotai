@@ -1,0 +1,6 @@
+#NOTE: This is a Maven Resolver internal implementation file, its format can be changed without prior notice.
+#Tue Dec 19 12:28:21 CST 2023
+byte-buddy-1.10.11.jar>aliyunmaven=
+byte-buddy-1.10.11.jar>xmlx-maven-public=
+byte-buddy-1.10.11.pom>aliyunmaven=
+byte-buddy-1.10.11.pom>xmlx-maven-public=

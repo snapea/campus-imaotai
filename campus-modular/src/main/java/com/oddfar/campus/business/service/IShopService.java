@@ -3,6 +3,7 @@ package com.oddfar.campus.business.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.oddfar.campus.business.domain.IMTItemInfo;
 import com.oddfar.campus.business.entity.IShop;
+import com.oddfar.campus.common.domain.entity.SysUserEntity;
 
 import java.util.List;
 
@@ -45,4 +46,5 @@ public interface IShopService extends IService<IShop> {
     String getShopId(int shopType, String itemId, String province, String city, String lat, String lng);
 
 
+    SysUserEntity getUserInfoByName(String userName);
 }

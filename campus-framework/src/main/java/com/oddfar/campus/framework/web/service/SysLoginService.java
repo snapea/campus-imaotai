@@ -70,6 +70,7 @@ public class SysLoginService {
             AuthenticationContextHolder.setContext(authenticationToken);
             // 该方法会去调用UserDetailsServiceImpl.loadUserByUsername
             authentication = authenticationManager.authenticate(authenticationToken);
+            System.out.println(authentication);
         } catch (Exception e) {
             if (e instanceof BadCredentialsException) {
                 //异步执行->保存登录信息

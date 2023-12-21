@@ -1,0 +1,6 @@
+#NOTE: This is a Maven Resolver internal implementation file, its format can be changed without prior notice.
+#Tue Dec 19 12:31:02 CST 2023
+spring-boot-starter-jdbc-2.5.3.pom>xmlx-maven-public=
+spring-boot-starter-jdbc-2.5.3.pom>aliyunmaven=
+spring-boot-starter-jdbc-2.5.3.jar>aliyunmaven=
+spring-boot-starter-jdbc-2.5.3.jar>xmlx-maven-public=

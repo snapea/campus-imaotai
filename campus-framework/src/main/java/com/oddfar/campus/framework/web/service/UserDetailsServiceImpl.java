@@ -5,6 +5,7 @@ import com.oddfar.campus.common.domain.model.LoginUser;
 import com.oddfar.campus.common.enums.UserStatusEnum;
 import com.oddfar.campus.common.exception.ServiceException;
 import com.oddfar.campus.common.exception.user.UserPasswordNotMatchException;
+import com.oddfar.campus.common.utils.DateUtils;
 import com.oddfar.campus.common.utils.StringUtils;
 import com.oddfar.campus.framework.service.SysUserService;
 import org.slf4j.Logger;
@@ -14,6 +15,12 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
 /**
  * 用户验证处理
@@ -36,7 +43,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         SysUserEntity user = userService.selectUserByUserName(username);
-        if (StringUtils.isNull(user)) {
+        if (user == null) {
             log.info("登录用户：{} 不存在.", username);
             throw new UserPasswordNotMatchException();
         } else if (UserStatusEnum.DELETED.getCode().equals(user.getStatus())) {
@@ -45,10 +52,15 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         } else if (UserStatusEnum.DISABLE.getCode().equals(user.getStatus())) {
             log.info("登录用户：{} 已被停用.", username);
             throw new ServiceException("对不起，您的账号：" + username + " 已停用");
+        } else if (user.getExpirationTime() != null && user.getExpirationTime().before(new Date())) {
+            log.info("登录用户：{} 已过期.", username);
+            throw new ServiceException("对不起，您的账号：" + username + " 已过期");
         }
 
+        System.out.println(333);
         passwordService.validate(user);
 
+        System.out.println(222);
         return createLoginUser(user);
     }
 

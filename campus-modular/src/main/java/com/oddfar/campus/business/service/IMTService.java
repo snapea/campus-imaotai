@@ -77,5 +77,5 @@ public interface IMTService {
      */
     void appointmentResults();
 
-
+    void appointmentResultsBatchV2();
 }

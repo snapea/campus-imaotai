@@ -1,0 +1,6 @@
+#NOTE: This is a Maven Resolver internal implementation file, its format can be changed without prior notice.
+#Tue Dec 19 12:31:05 CST 2023
+spring-jdbc-5.3.9.pom>xmlx-maven-public=
+spring-jdbc-5.3.9.pom>aliyunmaven=
+spring-jdbc-5.3.9.jar>aliyunmaven=
+spring-jdbc-5.3.9.jar>xmlx-maven-public=

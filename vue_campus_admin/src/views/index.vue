@@ -6,14 +6,10 @@
     <p>
       所有直接或间接使用本项目的个人和组织，应24小时内完成学习和研究，并及时删除本项目中的所有内容。如对本项目的功能有需求，应自行开发相关功能。
     </p>
-    <p></p>
-    <p>本项目免费，无任何盈利</p>
-    <p>项目完全开源，更新地址：https://github.com/oddfar/campus-imaotai</p>
 
     <el-card class="box-card">
       <p>版本情况:</p>
-      <p>campus-imaotai:{{ version }}</p>
-      <p>campus框架:{{ frameworkVersion }}</p>
+      <p>imaotai管理系统:{{ version }}</p>
     </el-card>
   </div>
 </template>

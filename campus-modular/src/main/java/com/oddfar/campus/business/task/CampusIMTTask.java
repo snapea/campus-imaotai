@@ -71,11 +71,18 @@ public class CampusIMTTask {
     /**
      * 18.05分获取申购结果
      */
+//    @Async
+//    @Scheduled(cron = "0 5 18 ? * * ")
+//    public void appointmentResults() {
+//        imtService.appointmentResults();
+//    }
+
     @Async
     @Scheduled(cron = "0 5 18 ? * * ")
-    public void appointmentResults() {
-        imtService.appointmentResults();
+    public void appointmentResultsV2() {
+        imtService.appointmentResultsBatchV2();
     }
+
 
 
 }

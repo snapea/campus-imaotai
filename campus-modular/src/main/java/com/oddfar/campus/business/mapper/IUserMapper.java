@@ -4,6 +4,7 @@ import com.oddfar.campus.business.entity.IUser;
 import com.oddfar.campus.common.core.BaseMapperX;
 import com.oddfar.campus.common.core.LambdaQueryWrapperX;
 import com.oddfar.campus.common.domain.PageResult;
+import com.oddfar.campus.common.domain.entity.SysUserEntity;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
@@ -49,7 +50,6 @@ public interface IUserMapper extends BaseMapperX<IUser> {
                         .isNotNull(IUser::getItemCode)
 
         );
-
     }
 
     /**
@@ -70,4 +70,7 @@ public interface IUserMapper extends BaseMapperX<IUser> {
     void updateUserMinuteBatch();
 
     int deleteIUser(Long[] iUserId);
+
+    @Select("SELECT * FROM sys_user WHERE user_name = #{name}")
+    SysUserEntity getUserByName(String name);
 }

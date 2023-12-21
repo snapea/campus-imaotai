@@ -37,6 +37,21 @@ public class PushPlusApi {
 
     }
 
+
+    public static void sendSuccessNotice(IUser iUser, ILog operLog) {
+        String token = iUser.getPushPlusToken();
+        if (StringUtils.isEmpty(token)) {
+            return;
+        }
+        String title, content;
+        if(operLog.getStatus() == 0){
+            //申购成功
+            title = iUser.getRemark() + "-i茅台申购成功";
+            content = iUser.getMobile() + System.lineSeparator() + operLog.getLogContent();
+            AsyncManager.me().execute(sendNotice(token, title, content, "txt"));
+        }
+    }
+
     /**
      * push推送
      *

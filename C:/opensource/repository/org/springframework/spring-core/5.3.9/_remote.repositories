@@ -1,0 +1,6 @@
+#NOTE: This is a Maven Resolver internal implementation file, its format can be changed without prior notice.
+#Tue Dec 19 12:31:00 CST 2023
+spring-core-5.3.9.jar>aliyunmaven=
+spring-core-5.3.9.jar>xmlx-maven-public=
+spring-core-5.3.9.pom>xmlx-maven-public=
+spring-core-5.3.9.pom>aliyunmaven=

@@ -1,0 +1,6 @@
+#NOTE: This is a Maven Resolver internal implementation file, its format can be changed without prior notice.
+#Tue Dec 19 12:30:59 CST 2023
+spring-boot-starter-2.6.3.jar>aliyunmaven=
+spring-boot-starter-2.6.3.jar>xmlx-maven-public=
+spring-boot-starter-2.6.3.pom>xmlx-maven-public=
+spring-boot-starter-2.6.3.pom>aliyunmaven=

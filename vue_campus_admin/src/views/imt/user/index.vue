@@ -75,36 +75,32 @@
           icon="el-icon-search"
           size="mini"
           @click="handleQuery"
-        >搜索
-        </el-button
-        >
+          >搜索
+        </el-button>
         <el-button icon="el-icon-refresh" size="mini" @click="resetQuery"
-        >重置
-        </el-button
-        >
+          >重置
+        </el-button>
       </el-form-item>
     </el-form>
 
     <el-row :gutter="10" class="mb8">
-      <el-col :span="1.5">
+      <el-col :span="1.5" v-if="total < accountMaxCount">
         <el-button
           type="primary"
           plain
           icon="el-icon-plus"
           size="mini"
           @click="handleAddIUser"
-        >添加账号
-        </el-button
-        >
+          >添加账号
+        </el-button>
         <el-button
           type="primary"
           plain
           icon="el-icon-plus"
           size="mini"
           @click="handleAdd"
-        >直接新增
-        </el-button
-        >
+          >直接新增
+        </el-button>
       </el-col>
 
       <el-col :span="1.5">
@@ -115,9 +111,8 @@
           size="mini"
           :disabled="single"
           @click="handleUpdate"
-        >修改
-        </el-button
-        >
+          >修改
+        </el-button>
       </el-col>
       <el-col :span="1.5">
         <el-button
@@ -127,9 +122,8 @@
           size="mini"
           :disabled="multiple"
           @click="handleDelete"
-        >删除
-        </el-button
-        >
+          >删除
+        </el-button>
       </el-col>
 
       <right-toolbar
@@ -157,18 +151,18 @@
             </el-form-item>
             <el-form-item label="i茅台token">
               <span v-if="props.row.token">{{
-                  props.row.token.substring(0, 5) + "......"
-                }}</span>
+                props.row.token.substring(0, 5) + "......"
+              }}</span>
             </el-form-item>
             <el-form-item label="i茅台cookie">
               <span v-if="props.row.cookie">{{
-                  props.row.cookie.substring(0, 5) + "......"
-                }}</span>
+                props.row.cookie.substring(0, 5) + "......"
+              }}</span>
             </el-form-item>
             <el-form-item label="pulsh推送token">
               <span v-if="props.row.pushPlusToken">{{
-                  props.row.pushPlusToken.substring(0, 5) + "......"
-                }}</span>
+                props.row.pushPlusToken.substring(0, 5) + "......"
+              }}</span>
             </el-form-item>
             <el-form-item label="设备id">
               <span>{{ props.row.deviceId }}</span>
@@ -210,11 +204,11 @@
         </template>
       </el-table-column>
 
-      <el-table-column type="selection" width="55" align="center"/>
-      <el-table-column label="手机号" align="center" prop="mobile"/>
-      <el-table-column label="备注" align="center" prop="remark"/>
-      <el-table-column label="预约项目code" align="center" prop="itemCode"/>
-      <el-table-column label="省份" align="center" prop="provinceName"/>
+      <el-table-column type="selection" width="55" align="center" />
+      <el-table-column label="手机号" align="center" prop="mobile" />
+      <el-table-column label="备注" align="center" prop="remark" />
+      <el-table-column label="预约项目code" align="center" prop="itemCode" />
+      <el-table-column label="省份" align="center" prop="provinceName" />
       <el-table-column
         label="类型"
         align="center"
@@ -223,11 +217,11 @@
       >
         <template slot-scope="scope">
           <span>{{
-              scope.row.shopType == 1 ? "预约出货量最大门店" : "预约附近门店"
-            }}</span>
+            scope.row.shopType == 1 ? "预约出货量最大门店" : "预约附近门店"
+          }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="预约执行分钟" align="center" prop="minute"/>
+      <el-table-column label="预约执行分钟" align="center" prop="minute" />
 
       <el-table-column
         label="到期时间"
@@ -250,25 +244,22 @@
             type="text"
             icon="el-icon-thumb"
             @click="reservation(scope.row)"
-          >预约
-          </el-button
-          >
+            >预约
+          </el-button>
           <el-button
             size="mini"
             type="text"
             icon="el-icon-thumb"
             @click="travelReward(scope.row)"
-          >旅行
-          </el-button
-          >
+            >旅行
+          </el-button>
           <el-button
             size="mini"
             type="text"
             icon="el-icon-edit"
             @click="handleUpdate(scope.row)"
-          >修改
-          </el-button
-          >
+            >修改
+          </el-button>
           <el-button
             size="mini"
             type="text"
@@ -282,9 +273,8 @@
             type="text"
             icon="el-icon-delete"
             @click="handleDelete(scope.row)"
-          >删除
-          </el-button
-          >
+            >删除
+          </el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -301,29 +291,29 @@
     <el-dialog :title="title" :visible.sync="open" width="600px" append-to-body>
       <el-form ref="form" :model="form" :rules="rules" label-width="100px">
         <el-form-item v-if="toAdd != 1" label="手机号" prop="mobile">
-          <el-input v-model="form.mobile" placeholder="请输入I茅台用户手机号"/>
+          <el-input v-model="form.mobile" placeholder="请输入I茅台用户手机号" />
         </el-form-item>
         <el-row>
           <el-col :span="12">
             <el-form-item label="备注" prop="remark">
-              <el-input v-model="form.remark" placeholder="请输入备注"/>
+              <el-input v-model="form.remark" placeholder="请输入备注" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item label="用户id" prop="userId">
-              <el-input v-model="form.userId" placeholder="请输入I茅台用户id"/>
+              <el-input v-model="form.userId" placeholder="请输入I茅台用户id" />
             </el-form-item>
           </el-col>
         </el-row>
 
         <el-form-item label="toekn" prop="token">
-          <el-input v-model="form.token" placeholder="请输入I茅台toekn"/>
+          <el-input v-model="form.token" placeholder="请输入I茅台toekn" />
         </el-form-item>
         <el-form-item label="cookie" prop="cookie">
-          <el-input v-model="form.cookie" placeholder="请输入I茅台cookie"/>
+          <el-input v-model="form.cookie" placeholder="请输入I茅台cookie" />
         </el-form-item>
         <el-form-item label="设备id" prop="deviceId">
-          <el-input v-model="form.deviceId" placeholder="请输入设备id"/>
+          <el-input v-model="form.deviceId" placeholder="请输入设备id" />
         </el-form-item>
         <el-row>
           <el-col :span="12">
@@ -372,8 +362,7 @@
                   :value="dict.value"
                 ></el-option>
               </el-select>
-            </el-form-item
-            >
+            </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item label="类型" prop="shopType">
@@ -422,7 +411,7 @@
         <el-row>
           <el-col :span="12">
             <el-form-item label="门店商品ID" prop="ishopId">
-              <el-input v-model="form.ishopId" placeholder="请输入门店商品ID"/>
+              <el-input v-model="form.ishopId" placeholder="请输入门店商品ID" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
@@ -463,26 +452,25 @@
     >
       <el-form ref="form" :model="form">
         <el-form-item label="手机号" prop="mobile">
-          <el-input v-model="form.mobile" placeholder="请输入I茅台用户手机号"/>
+          <el-input v-model="form.mobile" placeholder="请输入I茅台用户手机号" />
           <div style="margin-top: 10px">
             <el-button
               type="primary"
               @click="sendCode(form.mobile)"
               :disabled="state"
-            >发送验证码<span v-if="state">({{ stateNum }})</span>
+              >发送验证码<span v-if="state">({{ stateNum }})</span>
             </el-button>
           </div>
         </el-form-item>
 
         <el-form-item label="验证码" prop="userId">
-          <el-input v-model="form.code" placeholder="请输入验证码"/>
+          <el-input v-model="form.code" placeholder="请输入验证码" />
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button type="primary" @click="login(form.mobile, form.code)"
-        >登 录
-        </el-button
-        >
+          >登 录
+        </el-button>
         <el-button @click="cancel">取 消</el-button>
       </div>
     </el-dialog>
@@ -500,20 +488,20 @@
               type="primary"
               @click="sendCode(form.mobile, form.deviceId)"
               :disabled="state"
-            >发送验证码<span v-if="state">({{ stateNum }})</span>
+              >发送验证码<span v-if="state">({{ stateNum }})</span>
             </el-button>
           </div>
         </el-form-item>
 
         <el-form-item label="验证码" prop="code">
-          <el-input v-model="form.code" placeholder="请输入验证码"/>
+          <el-input v-model="form.code" placeholder="请输入验证码" />
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button
           type="primary"
           @click="refresh(form.mobile, form.code, form.deviceId, 1)"
-        >刷 新
+          >刷 新
         </el-button>
         <el-button @click="cancel">取 消</el-button>
       </div>
@@ -532,9 +520,11 @@ import {
   login,
   reservation,
   travelReward,
+  getUserByNameReq,
 } from "@/api/imt/user";
+import { mapGetters } from "vuex";
 
-import {listItem} from "@/api/imt/item";
+import { listItem } from "@/api/imt/item";
 
 export default {
   name: "User",
@@ -559,6 +549,7 @@ export default {
       dateRange: [],
       // 弹出层标题
       title: "",
+      accountMaxCount: 0,
       // 是否显示弹出层
       open: false,
       openUser: false,
@@ -589,7 +580,7 @@ export default {
       // 表单校验
       rules: {
         mobile: [
-          {required: true, message: "手机号不能为空", trigger: "blur"},
+          { required: true, message: "手机号不能为空", trigger: "blur" },
         ],
       },
       //0:新增，1:修改
@@ -615,13 +606,25 @@ export default {
     listItem().then((response) => {
       this.itemList = response.data;
     });
+    // console.log(this.name)
+    this.getUserByName();
   },
+  computed: {
+    ...mapGetters(["name"]),
+  },
+
   methods: {
     //item下拉框选择
     changeItem(e) {
       this.form.itemCode = "";
       this.itemSelect.forEach((e) => {
         this.form.itemCode += e + "@";
+      });
+    },
+    getUserByName() {
+      getUserByNameReq({ username: this.name }).then((res) => {
+        console.log(res.data.accountMaxCount);
+        this.accountMaxCount = res.data.accountMaxCount;
       });
     },
     guid() {
@@ -800,8 +803,7 @@ export default {
           this.getList();
           this.$modal.msgSuccess("删除成功");
         })
-        .catch(() => {
-        });
+        .catch(() => {});
     },
     refresh(mobile, code, deviceId, status) {
       const msg = status ? "刷新成功" : "登录成功";

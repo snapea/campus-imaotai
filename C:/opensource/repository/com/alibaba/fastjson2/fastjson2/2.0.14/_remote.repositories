@@ -1,0 +1,6 @@
+#NOTE: This is a Maven Resolver internal implementation file, its format can be changed without prior notice.
+#Tue Dec 19 12:31:01 CST 2023
+fastjson2-2.0.14.jar>aliyunmaven=
+fastjson2-2.0.14.jar>xmlx-maven-public=
+fastjson2-2.0.14.pom>xmlx-maven-public=
+fastjson2-2.0.14.pom>aliyunmaven=
