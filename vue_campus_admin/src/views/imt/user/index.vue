@@ -623,7 +623,6 @@ export default {
     },
     getUserByName() {
       getUserByNameReq({ username: this.name }).then((res) => {
-        console.log(res.data.accountMaxCount);
         this.accountMaxCount = res.data.accountMaxCount;
       });
     },

@@ -109,6 +109,7 @@ public class SysUserServiceImpl implements SysUserService {
     @Override
     @Transactional
     public int updateUser(SysUserEntity user) {
+        System.out.println(user);
 
         Long userId = user.getUserId();
         // 删除用户与角色关联

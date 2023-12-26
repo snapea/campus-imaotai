@@ -1,11 +1,13 @@
 package com.oddfar.campus.business.controller;
 
+import com.oddfar.campus.business.entity.IAuthCode;
 import com.oddfar.campus.business.entity.IShop;
 import com.oddfar.campus.business.entity.IUser;
 import com.oddfar.campus.business.mapper.IUserMapper;
 import com.oddfar.campus.business.service.IMTService;
 import com.oddfar.campus.business.service.IShopService;
 import com.oddfar.campus.business.service.IUserService;
+import com.oddfar.campus.common.annotation.Anonymous;
 import com.oddfar.campus.common.annotation.ApiResource;
 import com.oddfar.campus.common.domain.PageResult;
 import com.oddfar.campus.common.domain.R;
@@ -14,6 +16,8 @@ import com.oddfar.campus.common.utils.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+
+import javax.websocket.server.PathParam;
 
 /**
  * I茅台用户Controller
@@ -102,6 +106,30 @@ public class IUserController {
     @PreAuthorize("@ss.resourceAuth()")
     public R login(String mobile, String code, String deviceId) {
         imtService.login(mobile, code, deviceId);
+
+        return R.ok();
+    }
+
+    /**
+     * 生成一个兑换码
+     * */
+    @Anonymous
+    @PostMapping(value = "/generateAuthCode")
+    public R generateAuthCode (@RequestBody() IAuthCode iAuth) {
+        String code = imtService.generateAuthCode(iAuth);
+
+        return R.ok().put("code", code);
+    }
+
+
+    /**
+     * 兑换有效期的码
+     * */
+
+    @Anonymous
+    @PostMapping(value = "/activeAuthCode")
+    public R activeAuthCode (@RequestBody() IAuthCode iAuthCode) {
+        imtService.activeAuthCode(iAuthCode);
 
         return R.ok();
     }

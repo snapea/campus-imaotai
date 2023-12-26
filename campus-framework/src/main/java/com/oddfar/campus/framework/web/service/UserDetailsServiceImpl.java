@@ -56,11 +56,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             log.info("登录用户：{} 已过期.", username);
             throw new ServiceException("对不起，您的账号：" + username + " 已过期");
         }
-
-        System.out.println(333);
         passwordService.validate(user);
-
-        System.out.println(222);
         return createLoginUser(user);
     }
 

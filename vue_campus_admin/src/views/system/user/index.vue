@@ -372,6 +372,7 @@
               <el-date-picker
                 v-model="form.expirationTime"
                 type="datetime"
+                @change="dateChange"
                 placeholder="选择日期时间"
                 align="right"
                 :picker-options="pickerOptions"
@@ -456,6 +457,7 @@ import {
 import { getToken } from "@/utils/auth";
 import Treeselect from "@riophae/vue-treeselect";
 import "@riophae/vue-treeselect/dist/vue-treeselect.css";
+import dayjs from "dayjs";
 
 export default {
   name: "User",
@@ -612,6 +614,9 @@ export default {
     });
   },
   methods: {
+    dateChange(e) {
+      this.form.expirationTime = dayjs(e).format("yyyy-MM-dd HH:mm:ss")
+    },
     /** 查询用户列表 */
     getList() {
       this.loading = true;

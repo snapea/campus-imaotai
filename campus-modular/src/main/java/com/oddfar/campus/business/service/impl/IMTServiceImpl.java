@@ -13,12 +13,11 @@ import cn.hutool.http.Method;
 import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONArray;
 import com.alibaba.fastjson2.JSONObject;
+import com.oddfar.campus.business.entity.IAuthCode;
 import com.oddfar.campus.business.entity.IUser;
+import com.oddfar.campus.business.entity.SysUser;
 import com.oddfar.campus.business.mapper.IUserMapper;
-import com.oddfar.campus.business.service.IMTLogFactory;
-import com.oddfar.campus.business.service.IMTService;
-import com.oddfar.campus.business.service.IShopService;
-import com.oddfar.campus.business.service.IUserService;
+import com.oddfar.campus.business.service.*;
 import com.oddfar.campus.common.core.RedisCache;
 import com.oddfar.campus.common.exception.ServiceException;
 import com.oddfar.campus.common.utils.StringUtils;
@@ -32,15 +31,10 @@ import javax.annotation.PostConstruct;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import static com.oddfar.campus.business.api.PushPlusApi.sendNotice;
 
 @Service
 public class IMTServiceImpl implements IMTService {
@@ -57,6 +51,12 @@ public class IMTServiceImpl implements IMTService {
     private IUserService iUserService;
     @Autowired
     private IShopService iShopService;
+
+    @Autowired
+    private IAuthService iAuthService;
+
+    @Autowired
+    private SysUserService sysUserService;
 
     private final static String SALT = "2af72f100c356273d46284f6fd1dfc08";
 
@@ -377,30 +377,6 @@ public class IMTServiceImpl implements IMTService {
         return travelRewardXmy;
 
     }
-
-    // 领取小茅运
-    public void receiveReward(IUser iUser) {
-        String url = "https://h5.moutai519.com.cn/game/xmTravel/receiveReward";
-        HttpRequest request = HttpUtil.createRequest(Method.POST, url);
-
-        request.header("MT-Device-ID", iUser.getDeviceId())
-                .header("MT-APP-Version", getMTVersion())
-                .header("User-Agent", "iOS;16.3;Apple;?unrecognized?")
-                .header("MT-Lat", iUser.getLat())
-                .header("MT-Lng", iUser.getLng())
-                .cookie("MT-Token-Wap=" + iUser.getCookie() + ";MT-Device-ID-Wap=" + iUser.getDeviceId() + ";");
-
-        HttpResponse execute = request.execute();
-        JSONObject body = JSONObject.parseObject(execute.body());
-
-        System.out.println(body);
-
-        if (body.getInteger("code") != 2000) {
-            String message = "领取小茅运失败";
-            throw new ServiceException(message);
-        }
-    }
-
     //获取用户页面数据
     public Map<String, Integer> getUserIsolationPageData(IUser iUser) {
         //查询小茅运信息
@@ -590,6 +566,46 @@ public class IMTServiceImpl implements IMTService {
                 e.printStackTrace();
             }
 
+        }
+    }
+
+    @Override
+    public String generateAuthCode(IAuthCode iAuthCode) {
+        String uuid = UUID.randomUUID().toString();
+        iAuthCode.setCode(uuid);
+        iAuthCode.setDisabled(false);
+        iAuthService.insertIAuthCode(iAuthCode);
+        return uuid;
+    }
+
+    @Override
+    public void activeAuthCode(IAuthCode iAuthCode) {
+        Calendar calendar = Calendar.getInstance();
+
+        IAuthCode iAuth = iAuthService.selectAuthCode(iAuthCode);
+        if(iAuth.isDisabled()){
+            throw new ServiceException("这个激活码已经过期了");
+        }else if(!(iAuth.getBindPhone().equals(iAuth.getBindPhone()))) {
+            throw new ServiceException("这个激活码已经被手机号绑定了");
+        }
+        Integer effectTime = iAuth.getEffectTime();
+        String username = iAuthCode.getUsername();
+        SysUser sysUser = sysUserService.selectUserByName(username);
+        Date expirationTime = sysUser.getExpirationTime();
+
+        // 如果时间在现在之前，那就现在的时间加上兑换的时间
+        // 如果时间在现在之后，那就用户的过期时间加上兑换的时间
+        if(expirationTime.after(new Date())){
+            calendar.setTime(expirationTime);
+        }
+        calendar.add(Calendar.DAY_OF_MONTH, effectTime);
+        sysUser.setExpirationTime(calendar.getTime());
+        Integer result = sysUserService.updateUser(sysUser);
+        if(result > 0){
+            // 兑换成功
+            iAuthService.updateStatus(iAuth);
+        }else {
+            throw new ServiceException("兑换失败，数据更新失败");
         }
     }
 

@@ -1,5 +1,6 @@
 package com.oddfar.campus.business.service;
 
+import com.oddfar.campus.business.entity.IAuthCode;
 import com.oddfar.campus.business.entity.IUser;
 
 public interface IMTService {
@@ -78,4 +79,8 @@ public interface IMTService {
     void appointmentResults();
 
     void appointmentResultsBatchV2();
+
+    String generateAuthCode(IAuthCode iAuthCode);
+
+    void activeAuthCode(IAuthCode iAuthCode);
 }

@@ -1,33 +1,24 @@
-package com.oddfar.campus.common.domain.entity;
+package com.oddfar.campus.business.entity;
 
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.*;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.oddfar.campus.common.domain.BaseEntity;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.oddfar.campus.common.domain.entity.SysRoleEntity;
 import com.oddfar.campus.common.validator.Xss;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
-
-/**
- * 用户对象 sys_user
- *
- * @author 致远 oddfar@163.com
- * @since 1.0.0 2022-09-24
- */
+import java.util.Map;
 
 @TableName("sys_user")
-@EqualsAndHashCode(callSuper = true)
 @Data
 @NoArgsConstructor
-public class SysUserEntity extends BaseEntity  {
+public class SysUser {
+
     private static final long serialVersionUID = 1L;
 
     /** 用户ID */
@@ -102,19 +93,49 @@ public class SysUserEntity extends BaseEntity  {
     /** 角色ID */
     @TableField(exist = false)
     private Long roleId;
+    private static final Integer PAGE_NUM = 1;
+    private static final Integer PAGE_SIZE = 10;
 
-    public SysUserEntity(Long userId){
-        this.userId = userId;
+
+    @TableField(fill = FieldFill.INSERT)
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    private Date createTime;
+
+    @TableField(fill = FieldFill.INSERT)
+    private Long createUser;
+
+    @TableField(fill = FieldFill.UPDATE)
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    private Date updateTime;
+
+    @TableField(fill = FieldFill.UPDATE)
+    private Long updateUser;
+
+    @TableLogic
+    @TableField(fill = FieldFill.INSERT)
+    @JsonIgnore
+    private Integer delFlag;
+
+    @TableField(exist = false)
+    private Map<String, Object> params;
+
+    @NotNull(message = "页码不能为空")
+    @Min(value = 1, message = "页码最小值为 1")
+    @TableField(exist = false)
+    @JsonIgnore
+    private Integer pageNum = PAGE_NUM;
+
+    @NotNull(message = "每页条数不能为空")
+    @Min(value = 1, message = "每页条数最小值为 1")
+    @Max(value = 100, message = "每页条数最大值为 100")
+    @TableField(exist = false)
+    @JsonIgnore
+    private Integer pageSize = PAGE_SIZE;
+
+    public Map<String, Object> getParams() {
+        if (params == null) {
+            params = new HashMap<>();
+        }
+        return params;
     }
-
-    public boolean isAdmin()
-    {
-        return isAdmin(this.userId);
-    }
-
-    public static boolean isAdmin(Long userId)
-    {
-        return userId != null && 1L == userId;
-    }
-
 }
