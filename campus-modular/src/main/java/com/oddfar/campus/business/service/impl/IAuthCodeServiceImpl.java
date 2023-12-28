@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 public class IAuthCodeServiceImpl implements IAuthService {
     @Autowired
     private IAuthCodeMapper iAuthCodeMapper;
+
     @Override
     public void insertIAuthCode(IAuthCode iAuthCode) {
         iAuthCodeMapper.insert(iAuthCode);
@@ -32,6 +33,4 @@ public class IAuthCodeServiceImpl implements IAuthService {
         QueryWrapper.eq("code", iAuth.getCode());
         iAuthCodeMapper.update(iAuth, QueryWrapper);
     }
-
-
 }
