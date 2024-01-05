@@ -104,7 +104,7 @@ export default {
         code: [{ required: true, trigger: "change", message: "请输入验证码" }]
       },
       loading: false,
-      captchaEnabled: true
+      captchaEnabled: false
     };
   },
   created() {
